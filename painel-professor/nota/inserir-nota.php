@@ -5,9 +5,9 @@ $nota = $_POST['nota'];
 $turma = $_POST['turma'];
 $periodo = $_POST['periodo'];
 $aluno = $_POST['aluno'];
-$tipo = $_POST['tipo'];
+@$tipo = $_POST['tipo'];
 
-if ($nota == "") {
+if ($nota == null or $nota == " ") {
 	echo 'A nota é Obrigatória!';
 	exit();
 }
@@ -58,7 +58,7 @@ if ($serie >= 3) {
 		if ($tipo1 == 'Recuperação') {
 			$total_rec = $total_rec + 1;
 		}
-		
+
 		if ($tipo1 == 'Prova Final') {
 			$total_pf = $total_pf + 1;
 		}
@@ -142,6 +142,8 @@ if ($serie >= 3) {
 	$soma2 = 0;
 	$rec2 = 0;
 	$rec1 = 0;
+}else {
+    $tipo = 'Conceito';
 }
 
 $query = $pdo->query("SELECT * FROM turmas where id = '$turma' ");

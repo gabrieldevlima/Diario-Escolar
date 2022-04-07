@@ -43,11 +43,10 @@ for ($i = 0; $i < count($res); $i++) {
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="minhaTabela" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>COMPONENTE CURRICULAR</th>
-                        <th>ESCOLA</th>
                         <th>PROFESSOR</th>
                         <th>ANO/SÉRIE</th>
                         <th>TURMA</th>
@@ -73,7 +72,6 @@ for ($i = 0; $i < count($res); $i++) {
                         }
 
                         $disciplina = $res[$i]['disciplina'];
-                        $sala = $res[$i]['sala'];
                         $professor = $res[$i]['professor'];
                         $serie = $res[$i]['serie'];
                         $turno = $res[$i]['turno'];
@@ -85,11 +83,6 @@ for ($i = 0; $i < count($res); $i++) {
                         $query_r = $pdo->query("SELECT * FROM disciplinas where id =  '$disciplina'");
                         $res_r = $query_r->fetchAll(PDO::FETCH_ASSOC);
                         $nome_disc = $res_r[0]['nome'];
-
-                        //RECUPERAR NOME SALA
-                        $query_r = $pdo->query("SELECT * FROM salas where id =  '$sala'");
-                        $res_r = $query_r->fetchAll(PDO::FETCH_ASSOC);
-                        $nome_sala = $res_r[0]['sala'];
 
                         //RECUPERAR NOME PROFESSOR
                         $query_r = $pdo->query("SELECT * FROM professores where id =  '$professor'");
@@ -103,7 +96,6 @@ for ($i = 0; $i < count($res); $i++) {
                             <td>
                                 <a style="text-decoration : none" target="_blank" href="../rel/rendimento.php?id=<?php echo $id ?>" title="Ver Rendimento da turma" class="text-dark"><?php echo $nome_disc ?></a>
                             </td>
-                            <td><?php echo $nome_sala ?></td>
                             <td><?php echo $nome_prof ?></td>
                             <td><?php echo $serie ?></td>
                             <td><?php echo $letraturma ?></td>
@@ -321,7 +313,7 @@ for ($i = 0; $i < count($res); $i++) {
                                 <label>*Ano da Turma</label>
                                 <select name="ano" id="ano" class="form-control">
                                     <option selected value="<?php echo $ano2 ?>"><?php echo $ano2 ?></option>
-                                    <option value="2021">2022</option>
+                                    <option value="2022">2022</option>
                                     <option value="2023">2023</option>
                                     <option value="2024">2024</option>
                                 </select>
@@ -476,7 +468,7 @@ for ($i = 0; $i < count($res); $i++) {
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="minhaTabela2" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>Código</th>
@@ -803,14 +795,34 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir_matricula") {
 </script>
 
 
-
-
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#dataTable').dataTable({
-            "ordering": false
-        })
+<script>
+  $(document).ready(function() {
+    $('#minhaTabela').DataTable({
+      "language": {
+        "lengthMenu": "Mostrando _MENU_ registros por página",
+        "zeroRecords": "Nada encontrado",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "infoEmpty": "Nenhum registro disponível",
+        "infoFiltered": "(filtrado de _MAX_ registros no total)"
+      }, stateSave: true,
 
     });
+  });
 </script>
+
+<script>
+  $(document).ready(function() {
+    $('#minhaTabela2').DataTable({
+      "language": {
+        "lengthMenu": "Mostrando _MENU_ registros por página",
+        "zeroRecords": "Nada encontrado",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "infoEmpty": "Nenhum registro disponível",
+        "infoFiltered": "(filtrado de _MAX_ registros no total)"
+      }, stateSave: true,
+
+    });
+  });
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5544089876216624" crossorigin="anonymous"></script>

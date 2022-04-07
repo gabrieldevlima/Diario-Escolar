@@ -15,7 +15,7 @@ if ($total_reg == 0) {
 <html lang="pt-br">
 
 <head>
-    <title>Diário Eletrônico | SEMED</title>
+    <title>Diário Online | SEMED Santa Rosa do Piauí</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -25,7 +25,6 @@ if ($total_reg == 0) {
     <!------ Include the above in your HEAD tag ---------->
 
     <meta charset='UTF-8'>
-    <meta name="robots" content="noindex">
     <link rel="shortcut icon" type="image/x-icon" href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
     <link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
     <link rel="canonical" href="https://codepen.io/frytyler/pen/EGdtg" />

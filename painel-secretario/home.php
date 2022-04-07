@@ -4,7 +4,7 @@ if(@$_SESSION['nivel_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secret
 	echo "<script language='javascript'> window.location='../index.php' </script>";
 }
 
-require_once("../conexao.php"); 
+require_once("../conexao.php");
 
 
 //totais dos cards
@@ -112,3 +112,4 @@ $totalDisc = @count($res);
 	</div>
 
 </div>
+

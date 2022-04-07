@@ -32,7 +32,7 @@ $idUsuario = @$res[0]['id'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="Hugo Vasconcelos">
+    <meta name="author" content="Gabriel Lima">
 
     <title>Painel Diretor-Coordenador | SEMED</title>
 
@@ -62,12 +62,12 @@ $idUsuario = @$res[0]['id'];
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav sidebar sidebar-dark accordion" style="background-color: #003c16;" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-dark accordion" style="background: rgb(15,45,8); background: linear-gradient(180deg, rgba(15,45,8,1) 0%, rgba(0,60,22,1) 26%, rgba(9,121,45,1) 100%);" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
 
-                <div class="sidebar-brand-text mx-3"> Diretor / Coordenador </div>
+                <div class="sidebar-brand-text mx-3"> Diretor-Coordenador </div>
             </a>
 
             <!-- Divider -->

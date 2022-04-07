@@ -1,6 +1,6 @@
-<?php 
+<?php
 $pag = "responsaveis";
-require_once("../conexao.php"); 
+require_once("../conexao.php");
 
 @session_start();
     //verificar se o usuário está autenticado
@@ -15,7 +15,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'coordenad
 <div class="row mt-4 mb-4">
     <a type="button" class="btn-secondary btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Novo Responsável</a>
     <a type="button" class="btn-info btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
-    
+
 </div>
 
 
@@ -38,12 +38,12 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'coordenad
 
                 <tbody>
 
-                   <?php 
+                   <?php
 
                    $query = $pdo->query("SELECT * FROM responsaveis order by id desc ");
                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
-                   for ($i=0; $i < count($res); $i++) { 
+                   for ($i=0; $i < count($res); $i++) {
                       foreach ($res[$i] as $key => $value) {
                       }
 
@@ -93,7 +93,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'coordenad
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <?php 
+                <?php
                 if (@$_GET['funcao'] == 'editar') {
                     $titulo = "Editar Registro";
                     $id2 = $_GET['id'];
@@ -116,7 +116,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'coordenad
 
 
                 ?>
-                
+
                 <h5 class="modal-title" id="exampleModalLabel"><?php echo $titulo ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -151,9 +151,9 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'coordenad
                 </div>
             </div>
 
-            
 
-            
+
+
 
             <div class="form-group">
                 <label >Endereço</label>
@@ -167,7 +167,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'coordenad
                 <div id="mensagem">
 
                 </div>
-            </small> 
+            </small>
 
         </div>
 
@@ -241,9 +241,9 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'coordenad
             </div>
             <div class="modal-body">
 
-                <?php 
+                <?php
                 if (@$_GET['funcao'] == 'endereco') {
-                    
+
                     $id2 = $_GET['id'];
 
                     $query = $pdo->query("SELECT * FROM responsaveis where id = '$id2' ");
@@ -253,8 +253,8 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'coordenad
                     $telefone3 = $res[0]['telefone'];
                     $email3 = $res[0]['email'];
                     $endereco3 = $res[0]['endereco'];
-                    
-                } 
+
+                }
 
 
                 ?>
@@ -265,7 +265,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'coordenad
                             <span><b>Endereço: </b> <i><?php echo $endereco3 ?><br>
 
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -273,7 +273,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'coordenad
 
 
 
-                <?php 
+                <?php
 
                 if (@$_GET["funcao"] != null && @$_GET["funcao"] == "novo") {
                     echo "<script>$('#modalDados').modal('show');</script>";
@@ -418,6 +418,4 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'coordenad
 
                     });
                 </script>
-
-
 

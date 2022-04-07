@@ -18,8 +18,29 @@ $query_adm = $pdo->query("SELECT * FROM coordenadiretor where cpf = '$cpf' ");
 $res_adm = $query_adm->fetchAll(PDO::FETCH_ASSOC);
 $escola = $res_adm[0]['escola'];
 
+$query = $pdo->query("SELECT * FROM turmas order by id desc ");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
 
+for ($i = 0; $i < count($res); $i++) {
+    foreach ($res[$i] as $key => $value) {
+    }
+
+    $id = $res[$i]['id'];
+    $data_inicio = $res[$i]['data_inicio'];
+    $data_final = $res[$i]['data_final'];
+
+    if($data_final == date('0000-00-00')){
+        $pdo->query("UPDATE turmas SET data_final = '2022-12-22' where id = $id");
+    }
+
+    if($data_inicio == date('0000-00-00')){
+        $pdo->query("UPDATE turmas SET data_inicio = '2022-02-14' where id = $id");
+    }
 ?>
+
+<?php } ?>
+
+
 
 <div class="row mt-4 mb-4">
     <a type="button" class="btn-primary btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo"><i style="margin-right: 5px" style="margin-top: 5px" class='fas fa-plus-circle fa-lg'></i>Nova Turma</a>
@@ -33,13 +54,12 @@ $escola = $res_adm[0]['escola'];
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="minhaTabela2" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>COMPONENTE CURRICULAR</th>
                         <th>ESCOLA</th>
-                        <th>PROFESSOR</th>
-                        <th>ANO/SÉRIE</th>
+                        <th>PROFESSOR(A)</th>
                         <th>TURMA</th>
                         <th>AÇÕES</th>
                     </tr>
@@ -91,12 +111,12 @@ $escola = $res_adm[0]['escola'];
 
                         <tr>
                             <td>
-                                <a style="text-decoration : none" target="_blank" href="../rel/rendimento.php?id=<?php echo $id ?>" title="Ver Rendimento da turma" class="text-dark"><?php echo $nome_disc ?></a>
+                                <a style="text-decoration : none" target="_blank" href="../rel/rendimento.php?id=<?php echo $id ?>" title="Ver rendimento da turma" class="text-dark"><?php echo $nome_disc ?></a>
                             </td>
                             <td><?php echo $nome_sala ?></td>
                             <td><?php echo $nome_prof ?></td>
-                            <td><?php echo $serie ?></td>
-                            <td><?php echo $letraturma ?></td>
+                            <td><?php echo $serie. ' - '. $letraturma?></td>
+
 
 
 
@@ -106,7 +126,7 @@ $escola = $res_adm[0]['escola'];
 
                                 <a href="index.php?pag=<?php echo $pag ?>&funcao=endereco&id=<?php echo $id ?>" class='text-info mr-1' title='Mais Informações'><i class='fas fa-info-circle fa-lg'></i></a>
 
-                                <a href="index.php?pag=<?php echo $pag ?>&funcao=matricula&id=<?php echo $id ?>" class='text-success mr-1' title='Matricular Aluno'><i class='fas fa-user-plus fa-lg'></i></a>
+                                <a href="index.php?pag=<?php echo $pag ?>&funcao=matricula&id=<?php echo $id ?>" class='text-success mr-1' title='Inserir Aluno'><i class='fas fa-user-plus fa-lg'></i></a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -460,7 +480,7 @@ $escola = $res_adm[0]['escola'];
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Matricular Aluno <small><a style="text-decoration: none;" title="Ver Alunos Matriculados" href="index.php?pag=<?php echo $pag ?>&funcao=matriculados&id_turma=<?php echo $_GET['id'] ?>"><span class="ml-3">Ver Alunos</span></a></small></h5>
+                <h5 class="modal-title">Inserir Aluno <small><a style="text-decoration: none;" title="Ver Alunos na Turma" href="index.php?pag=<?php echo $pag ?>&funcao=matriculados&id_turma=<?php echo $_GET['id'] ?>"><span class="ml-3">Ver Alunos</span></a></small></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -486,7 +506,7 @@ $escola = $res_adm[0]['escola'];
 
                                     <?php
 
-                                    $query = $pdo->query("SELECT * FROM alunos order by id desc ");
+                                    $query = $pdo->query("SELECT * FROM alunos order by id ");
                                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                                     for ($i = 0; $i < count($res); $i++) {
@@ -518,7 +538,7 @@ $escola = $res_adm[0]['escola'];
 
                                             <td style="text-align: center;">
 
-                                                <a href="index.php?pag=<?php echo $pag ?>&funcao=confirmar&id_turma=<?php echo $_GET['id'] ?>&id_aluno=<?php echo $id_aluno ?>" class='text-info mr-1' title='Confirmar Matricula'><i class='fas fa-check fa-lg'></i></a>
+                                                <a href="index.php?pag=<?php echo $pag ?>&funcao=confirmar&id_turma=<?php echo $_GET['id'] ?>&id_aluno=<?php echo $id_aluno ?>" class='text-info mr-1' title='Confirmar'><i class='fas fa-check fa-lg'></i></a>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -542,14 +562,14 @@ $escola = $res_adm[0]['escola'];
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><a target="_self" href="index.php?pag=<?php echo $pag ?>&funcao=matricula&id=<?php echo $_GET['id_turma'] ?>"><span class="fa fa-arrow-left text-secondary"></i>&nbsp;&nbsp;</span></a> Alunos Matriculados</h5>
+                <h5 class="modal-title"><a target="_self" href="index.php?pag=<?php echo $pag ?>&funcao=matricula&id=<?php echo $_GET['id_turma'] ?>"><span class="fa fa-arrow-left text-secondary"></i>&nbsp;&nbsp;</span></a> Alunos na Turma</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <?php
-                $query = $pdo->query("SELECT * FROM matriculas where turma = '$_GET[id_turma]' order by id desc ");
+                $query = $pdo->query("SELECT * FROM matriculas where turma = '$_GET[id_turma]' order by id ");
                 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                 for ($i = 0; $i < count($res); $i++) {
@@ -564,7 +584,7 @@ $escola = $res_adm[0]['escola'];
                     $nome_aluno = $res_r[0]['nome'];
 
                 ?>
-                    <span><small><a style="margin-right: 5px" title="Excluir Matrícula" href="index.php?pag=<?php echo $pag ?>&funcao=excluir_matricula&id_m=<?php echo $id_m ?>&id_turma=<?php echo $_GET['id_turma'] ?>"><span class="ml-2"><i class='fas fa-times text-danger fa-lg'></i></span></a><?php echo $nome_aluno ?></small></span>
+                    <span><small><a style="margin-right: 5px" title="Remover Aluno da Turma" href="index.php?pag=<?php echo $pag ?>&funcao=excluir_matricula&id_m=<?php echo $id_m ?>&id_turma=<?php echo $_GET['id_turma'] ?>"><span class="ml-2"><i class='fas fa-times text-danger fa-lg'></i></span></a><?php echo $nome_aluno ?></small></span>
 
                     <hr style="margin:4px">
 
@@ -778,11 +798,34 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir_matricula") {
 
 
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#dataTable').dataTable({
-            "ordering": false
-        })
+<script>
+  $(document).ready(function() {
+    $('#minhaTabela').DataTable({
+      "language": {
+        "lengthMenu": "Mostrando _MENU_ registros por página",
+        "zeroRecords": "Nada encontrado",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "infoEmpty": "Nenhum registro disponível",
+        "infoFiltered": "(filtrado de _MAX_ registros no total)"
+      }, stateSave: true,
 
     });
+  });
 </script>
+
+<script>
+  $(document).ready(function() {
+    $('#minhaTabela2').DataTable({
+      "language": {
+        "lengthMenu": "Mostrando _MENU_ registros por página",
+        "zeroRecords": "Nada encontrado",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "infoEmpty": "Nenhum registro disponível",
+        "infoFiltered": "(filtrado de _MAX_ registros no total)"
+      }, stateSave: true,
+
+    });
+  });
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5544089876216624" crossorigin="anonymous"></script>

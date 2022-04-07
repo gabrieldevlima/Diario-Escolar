@@ -4,7 +4,7 @@ if(@$_SESSION['nivel_usuario'] == null || @$_SESSION['nivel_usuario'] != 'coorde
 	echo "<script language='javascript'> window.location='../index.php' </script>";
 }
 
-require_once("../conexao.php"); 
+require_once("../conexao.php");
 
 
 //totais dos cards
@@ -112,3 +112,6 @@ $totalDisc = @count($res);
 	</div>
 
 </div>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5544089876216624" crossorigin="anonymous"></script>
+

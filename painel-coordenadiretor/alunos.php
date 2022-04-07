@@ -24,7 +24,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'coordenad
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="minhaTabela" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>NOME COMPLETO</th>
@@ -57,7 +57,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'coordenad
 
                         <tr>
                             <td>
-                                <a target="_blank" href="../rel/boletim.php?id=<?php echo $id ?>" title="Gerar Boletim" class="text-dark"><?php echo $nome ?></a>
+                                <a style="text-decoration : none" target="_blank" href="../rel/boletim.php?id=<?php echo $id ?>" title="Gerar Boletim" class="text-dark"><?php echo $nome ?></a>
 
                             </td>
                             <td><?php echo $datanascF ?></td>
@@ -383,11 +383,19 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "matriculas") {
 
 
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#dataTable').dataTable({
-            "ordering": false
-        })
+<script>
+  $(document).ready(function() {
+    $('#minhaTabela').DataTable({
+      "language": {
+        "lengthMenu": "Mostrando _MENU_ registros por página",
+        "zeroRecords": "Nada encontrado",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "infoEmpty": "Nenhum registro disponível",
+        "infoFiltered": "(filtrado de _MAX_ registros no total)"
+      }, stateSave: true,
 
     });
+  });
 </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5544089876216624" crossorigin="anonymous"></script>

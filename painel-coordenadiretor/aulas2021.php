@@ -27,7 +27,7 @@ $escola = $res_adm[0]['escola'];
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="minhaTabela" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>COMPONENTE CURRICULAR</th>
@@ -432,7 +432,7 @@ $escola = $res_adm[0]['escola'];
 
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                                    <table class="table table-bordered" id="minhaTabela2" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>Nº</th>
@@ -804,11 +804,33 @@ $escola = $res_adm[0]['escola'];
         </script>
 
 
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#dataTable').dataTable({
-                    "ordering": false
-                })
+<script>
+  $(document).ready(function() {
+    $('#minhaTabela').DataTable({
+      "language": {
+        "lengthMenu": "Mostrando _MENU_ registros por página",
+        "zeroRecords": "Nada encontrado",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "infoEmpty": "Nenhum registro disponível",
+        "infoFiltered": "(filtrado de _MAX_ registros no total)"
+      }, stateSave: true,
 
-            });
-        </script>
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $('#minhaTabela2').DataTable({
+      "language": {
+        "lengthMenu": "Mostrando _MENU_ registros por página",
+        "zeroRecords": "Nada encontrado",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "infoEmpty": "Nenhum registro disponível",
+        "infoFiltered": "(filtrado de _MAX_ registros no total)"
+      }, stateSave: true,
+
+    });
+  });
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5544089876216624" crossorigin="anonymous"></script>

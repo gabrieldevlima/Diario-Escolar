@@ -52,7 +52,7 @@ $total_aulas = @count($res_resp);
 <div class="row">
 
     <div class="col-xl-4 col-md-6 mb-4">
-        <a class="text-dark" href="index.php?pag=aula&funcao=aulas&id=<?php echo $id_turma ?>&aulas=sim" title="Lançar Aulas">
+        <a style="text-decoration : none" class="text-dark" href="index.php?pag=aula&funcao=aulas&id=<?php echo $id_turma ?>&aulas=sim" title="Lançar Aulas">
             <div class="card text-info shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -71,7 +71,7 @@ $total_aulas = @count($res_resp);
     </div>
 
     <div class="col-xl-4 col-md-6 mb-4">
-        <a class="text-dark" href="index.php?pag=frequencia&funcao=chamada&id=<?php echo $id_turma ?>&chamada=sim" title="Registrar Frequência">
+        <a style="text-decoration : none" class="text-dark" href="index.php?pag=frequencia&funcao=chamada&id=<?php echo $id_turma ?>&chamada=sim" title="Registrar Frequência">
             <div class="card text-warning shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -90,7 +90,7 @@ $total_aulas = @count($res_resp);
     </div>
 
     <div class="col-xl-4 col-md-6 mb-4">
-        <a class="text-dark" href="index.php?pag=nota&funcao=notas&id=<?php echo $id_turma ?>&notas=sim" title="Registrar Nota">
+        <a style="text-decoration : none" class="text-dark" href="index.php?pag=nota&funcao=notas&id=<?php echo $id_turma ?>&notas=sim" title="Registrar Nota">
             <div class="card text-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -130,7 +130,6 @@ $total_aulas = @count($res_resp);
                             <div class="form-group">
                                 <label class="mb-2 mt-2">*Tipo de Aula</label>
                                 <select name="aula" class="form-control">
-                                    <option value=""></option>
                                     <option value="Aula Normal">Aula Normal</option>
                                     <option value="Aula Remota">Aula Remota</option>
                                     <option value="Reposição">Reposição</option>
@@ -308,7 +307,7 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
                 "info": "Página _PAGE_ de _PAGES_",
                 "infoEmpty": "Nenhum registro disponível",
                 "infoFiltered": "(filtrado de _MAX_ registros no total)"
-            }
+            }, stateSave: true,
         });
     });
 </script>
@@ -396,3 +395,5 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
         })
     })
 </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5544089876216624" crossorigin="anonymous"></script>

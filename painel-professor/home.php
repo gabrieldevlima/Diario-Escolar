@@ -98,7 +98,7 @@ $total_aulas = @count($res_aula);
 						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo @$totalDisc ?></div>
 					</div>
 					<div class="col-auto">
-						<i class="fas fa-clipboard-list fa-2x text-info"></i>
+						<i class="fas fa-book fa-2x text-info"></i>
 					</div>
 				</div>
 			</div>
@@ -114,7 +114,7 @@ $total_aulas = @count($res_aula);
 						<div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $total_aulas ?> </div>
 					</div>
 					<div class="col-auto">
-						<i class="fas fa-users fa-2x text-secondary"></i>
+						<i class="fas fa-list-alt fa-2x text-secondary"></i>
 					</div>
 				</div>
 			</div>
@@ -137,7 +137,7 @@ $total_aulas = @count($res_aula);
 
 					</div>
 					<div class="col-auto" align="center">
-						<i class="fas fa-clipboard-list fa-2x text-warning"></i>
+						<i class="fas fa-signal fa-2x text-warning"></i>
 
 					</div>
 				</div>
@@ -160,7 +160,7 @@ $total_aulas = @count($res_aula);
 						}  ?></div>
 					</div>
 					<div class="col-auto">
-						<i class="fas fa-clipboard-list fa-2x text-success"></i>
+						<i class="fas fa-percent fa-2x text-success"></i>
 					</div>
 				</div>
 			</div>
@@ -217,7 +217,7 @@ $total_aulas = @count($res_aula);
 	?>
 
 		<div class="col-xl-3 col-md-6 mb-4">
-			<a class="text-dark" href="index.php?pag=turma&id=<?php echo $id_turma ?>" title="Informações da Turma">
+			<a style="text-decoration : none" class="text-dark" href="index.php?pag=turma&id=<?php echo $id_turma ?>" title="Informações da Turma">
 				<div class="card <?php echo $classe_card ?> shadow h-100 py-2">
 					<div class="card-body">
 						<div class="row no-gutters align-items-center">
@@ -242,3 +242,5 @@ $total_aulas = @count($res_aula);
 	<?php } ?>
 
 </div>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5544089876216624" crossorigin="anonymous"></script>

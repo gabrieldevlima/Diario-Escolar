@@ -55,7 +55,7 @@ $total_aulas = @count($res_resp);
 <div class="row">
 
   <div class="col-xl-4 col-md-6 mb-4">
-    <a class="text-dark" href="index.php?pag=aula&funcao=aulas&id=<?php echo $id_turma ?>&aulas=sim" title="Lançar Aulas">
+    <a style="text-decoration : none" class="text-dark" href="index.php?pag=aula&funcao=aulas&id=<?php echo $id_turma ?>&aulas=sim" title="Lançar Aulas">
       <div class="card text-info shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -74,7 +74,7 @@ $total_aulas = @count($res_resp);
   </div>
 
   <div class="col-xl-4 col-md-6 mb-4">
-    <a class="text-dark" href="index.php?pag=frequencia&funcao=chamada&id=<?php echo $id_turma ?>&chamada=sim" title="Registrar Frequência">
+    <a style="text-decoration : none" class="text-dark" href="index.php?pag=frequencia&funcao=chamada&id=<?php echo $id_turma ?>&chamada=sim" title="Registrar Frequência">
       <div class="card text-warning shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -93,7 +93,7 @@ $total_aulas = @count($res_resp);
   </div>
 
   <div class="col-xl-4 col-md-6 mb-4">
-    <a class="text-dark" href="index.php?pag=nota&funcao=notas&id=<?php echo $id_turma ?>&notas=sim" title="Registrar Nota">
+    <a style="text-decoration : none" class="text-dark" href="index.php?pag=nota&funcao=notas&id=<?php echo $id_turma ?>&notas=sim" title="Registrar Nota">
       <div class="card text-success shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -394,72 +394,78 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "fazerchamada") {
   $id_aula_nova_chamada = $_GET['id_aula'];
   $id_turma_nova_chamada = $_GET['id'];
 
-  if ($escola == 12) {
-    if ($serie == 4) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_4 where aula = '$id_aula_nova_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 5) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_5 where aula = '$id_aula_nova_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 6) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_6 where aula = '$id_aula_nova_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 7) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_7 where aula = '$id_aula_nova_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 8) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_8 where aula = '$id_aula_nova_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 9) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_9 where aula = '$id_aula_nova_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    }
-  } else if ($escola == 13) {
-    $query = $pdo->query("SELECT * FROM frequencia_creche where aula = '$id_aula_nova_chamada' ");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-  } else if ($escola == 14) {
-    $query = $pdo->query("SELECT * FROM frequencia_nucleo where aula = '$id_aula_nova_chamada' ");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-  } else if ($escola == 15) {
-    $query = $pdo->query("SELECT * FROM frequencia_horizonte where aula = '$id_aula_nova_chamada' ");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-  } else {
-    $query = $pdo->query("SELECT * FROM frequencia_jose where aula = '$id_aula_nova_chamada' ");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-  }
+  $query = $pdo->query("SELECT * FROM aulas where id = '$id_aula_chamada' ");
+  $res = $query->fetchAll(PDO::FETCH_ASSOC);
+  if(count($res) > 0){
 
-  if (@count($res) == 0) {
-    $query_m = $pdo->query("SELECT * FROM matriculas where turma = '$id_turma_nova_chamada' order by id asc");
-    $res_m = $query_m->fetchAll(PDO::FETCH_ASSOC);
-
-    for ($i = 0; $i < count($res_m); $i++) {
-      foreach ($res_m[$i] as $key => $value) {
-      }
-      $aluno = $res_m[$i]['aluno'];
-      if ($escola == 12) {
+    if ($escola == 12) {
         if ($serie == 4) {
-          $pdo->query("INSERT INTO frequencia_francisco_4 SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_4 where aula = '$id_aula_nova_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
         } else if ($serie == 5) {
-          $pdo->query("INSERT INTO frequencia_francisco_5 SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_5 where aula = '$id_aula_nova_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
         } else if ($serie == 6) {
-          $pdo->query("INSERT INTO frequencia_francisco_6 SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_6 where aula = '$id_aula_nova_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
         } else if ($serie == 7) {
-          $pdo->query("INSERT INTO frequencia_francisco_7 SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_7 where aula = '$id_aula_nova_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
         } else if ($serie == 8) {
-          $pdo->query("INSERT INTO frequencia_francisco_8 SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_8 where aula = '$id_aula_nova_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
         } else if ($serie == 9) {
-          $pdo->query("INSERT INTO frequencia_francisco_9 SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_9 where aula = '$id_aula_nova_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
         }
       } else if ($escola == 13) {
-        $pdo->query("INSERT INTO frequencia_creche SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+        $query = $pdo->query("SELECT * FROM frequencia_creche where aula = '$id_aula_nova_chamada' ");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
       } else if ($escola == 14) {
-        $pdo->query("INSERT INTO frequencia_nucleo SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+        $query = $pdo->query("SELECT * FROM frequencia_nucleo where aula = '$id_aula_nova_chamada' ");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
       } else if ($escola == 15) {
-        $pdo->query("INSERT INTO frequencia_horizonte SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+        $query = $pdo->query("SELECT * FROM frequencia_horizonte where aula = '$id_aula_nova_chamada' ");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
       } else {
-        $pdo->query("INSERT INTO frequencia_jose SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+        $query = $pdo->query("SELECT * FROM frequencia_jose where aula = '$id_aula_nova_chamada' ");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
       }
-    }
+
+      if (@count($res) == 0) {
+        $query_m = $pdo->query("SELECT * FROM matriculas where turma = '$id_turma_nova_chamada' order by id asc");
+        $res_m = $query_m->fetchAll(PDO::FETCH_ASSOC);
+
+        for ($i = 0; $i < count($res_m); $i++) {
+          foreach ($res_m[$i] as $key => $value) {
+          }
+          $aluno = $res_m[$i]['aluno'];
+          if ($escola == 12) {
+            if ($serie == 4) {
+              $pdo->query("INSERT INTO frequencia_francisco_4 SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+            } else if ($serie == 5) {
+              $pdo->query("INSERT INTO frequencia_francisco_5 SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+            } else if ($serie == 6) {
+              $pdo->query("INSERT INTO frequencia_francisco_6 SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+            } else if ($serie == 7) {
+              $pdo->query("INSERT INTO frequencia_francisco_7 SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+            } else if ($serie == 8) {
+              $pdo->query("INSERT INTO frequencia_francisco_8 SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+            } else if ($serie == 9) {
+              $pdo->query("INSERT INTO frequencia_francisco_9 SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+            }
+          } else if ($escola == 13) {
+            $pdo->query("INSERT INTO frequencia_creche SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+          } else if ($escola == 14) {
+            $pdo->query("INSERT INTO frequencia_nucleo SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+          } else if ($escola == 15) {
+            $pdo->query("INSERT INTO frequencia_horizonte SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+          } else {
+            $pdo->query("INSERT INTO frequencia_jose SET turma = '$id_turma_nova_chamada', aluno =  '$aluno', aula = '$id_aula_nova_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+          }
+        }
+      }
+
   }
 
   echo "<script>$('#modal-chamada').modal('show');</script>";
@@ -471,91 +477,95 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "presenca") {
   $id_aluno_chamada = $_GET['id_aluno'];
   $id_aula_chamada = $_GET['id_aula'];
 
-  if ($escola == 12) {
-    if ($serie == 4) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_4 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 5) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_5 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 6) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_6 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 7) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_7 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 8) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_8 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 9) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_9 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    }
-  } else if ($escola == 13) {
-    $query = $pdo->query("SELECT * FROM frequencia_creche where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-  } else if ($escola == 14) {
-    $query = $pdo->query("SELECT * FROM frequencia_nucleo where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-  } else if ($escola == 15) {
-    $query = $pdo->query("SELECT * FROM frequencia_horizonte where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-  } else {
-    $query = $pdo->query("SELECT * FROM frequencia_jose where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-  }
-
-  if (@count($res) > 0) {
-    $id_chamada = $res[0]['id'];
-
+  $query = $pdo->query("SELECT * FROM aulas where id = '$id_aula_chamada' ");
+  $res = $query->fetchAll(PDO::FETCH_ASSOC);
+  if(count($res) > 0){
     if ($escola == 12) {
-      if ($serie == 4) {
-        $pdo->query("UPDATE frequencia_francisco_4 SET presenca = 'P' where id = '$id_chamada'");
-      } else if ($serie == 5) {
-        $pdo->query("UPDATE frequencia_francisco_5 SET presenca = 'P' where id = '$id_chamada'");
-      } else if ($serie == 6) {
-        $pdo->query("UPDATE frequencia_francisco_6 SET presenca = 'P' where id = '$id_chamada'");
-      } else if ($serie == 7) {
-        $pdo->query("UPDATE frequencia_francisco_7 SET presenca = 'P' where id = '$id_chamada'");
-      } else if ($serie == 8) {
-        $pdo->query("UPDATE frequencia_francisco_8 SET presenca = 'P' where id = '$id_chamada'");
-      } else if ($serie == 9) {
-        $pdo->query("UPDATE frequencia_francisco_9 SET presenca = 'P' where id = '$id_chamada'");
+        if ($serie == 4) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_4 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        } else if ($serie == 5) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_5 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        } else if ($serie == 6) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_6 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        } else if ($serie == 7) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_7 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        } else if ($serie == 8) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_8 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        } else if ($serie == 9) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_9 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        }
+      } else if ($escola == 13) {
+        $query = $pdo->query("SELECT * FROM frequencia_creche where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+      } else if ($escola == 14) {
+        $query = $pdo->query("SELECT * FROM frequencia_nucleo where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+      } else if ($escola == 15) {
+        $query = $pdo->query("SELECT * FROM frequencia_horizonte where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+      } else {
+        $query = $pdo->query("SELECT * FROM frequencia_jose where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
       }
-    } else if ($escola == 13) {
-      $pdo->query("UPDATE frequencia_creche SET presenca = 'P' where id = '$id_chamada'");
-    } else if ($escola == 14) {
-      $pdo->query("UPDATE frequencia_nucleo SET presenca = 'P' where id = '$id_chamada'");
-    } else if ($escola == 15) {
-      $pdo->query("UPDATE frequencia_horizonte SET presenca = 'P' where id = '$id_chamada'");
-    } else {
-      $pdo->query("UPDATE frequencia_jose SET presenca = 'P' where id = '$id_chamada'");
-    }
-  } else {
 
-    if ($escola == 12) {
-      if ($serie == 4) {
-        $pdo->query("INSERT INTO frequencia_francisco_4 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
-      } else if ($serie == 5) {
-        $pdo->query("INSERT INTO frequencia_francisco_5 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
-      } else if ($serie == 6) {
-        $pdo->query("INSERT INTO frequencia_francisco_6 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
-      } else if ($serie == 7) {
-        $pdo->query("INSERT INTO frequencia_francisco_7 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
-      } else if ($serie == 8) {
-        $pdo->query("INSERT INTO frequencia_francisco_8 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
-      } else if ($serie == 9) {
-        $pdo->query("INSERT INTO frequencia_francisco_9 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+      if (@count($res) > 0) {
+        $id_chamada = $res[0]['id'];
+
+        if ($escola == 12) {
+          if ($serie == 4) {
+            $pdo->query("UPDATE frequencia_francisco_4 SET presenca = 'P' where id = '$id_chamada'");
+          } else if ($serie == 5) {
+            $pdo->query("UPDATE frequencia_francisco_5 SET presenca = 'P' where id = '$id_chamada'");
+          } else if ($serie == 6) {
+            $pdo->query("UPDATE frequencia_francisco_6 SET presenca = 'P' where id = '$id_chamada'");
+          } else if ($serie == 7) {
+            $pdo->query("UPDATE frequencia_francisco_7 SET presenca = 'P' where id = '$id_chamada'");
+          } else if ($serie == 8) {
+            $pdo->query("UPDATE frequencia_francisco_8 SET presenca = 'P' where id = '$id_chamada'");
+          } else if ($serie == 9) {
+            $pdo->query("UPDATE frequencia_francisco_9 SET presenca = 'P' where id = '$id_chamada'");
+          }
+        } else if ($escola == 13) {
+          $pdo->query("UPDATE frequencia_creche SET presenca = 'P' where id = '$id_chamada'");
+        } else if ($escola == 14) {
+          $pdo->query("UPDATE frequencia_nucleo SET presenca = 'P' where id = '$id_chamada'");
+        } else if ($escola == 15) {
+          $pdo->query("UPDATE frequencia_horizonte SET presenca = 'P' where id = '$id_chamada'");
+        } else {
+          $pdo->query("UPDATE frequencia_jose SET presenca = 'P' where id = '$id_chamada'");
+        }
+      } else {
+
+        if ($escola == 12) {
+          if ($serie == 4) {
+            $pdo->query("INSERT INTO frequencia_francisco_4 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+          } else if ($serie == 5) {
+            $pdo->query("INSERT INTO frequencia_francisco_5 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+          } else if ($serie == 6) {
+            $pdo->query("INSERT INTO frequencia_francisco_6 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+          } else if ($serie == 7) {
+            $pdo->query("INSERT INTO frequencia_francisco_7 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+          } else if ($serie == 8) {
+            $pdo->query("INSERT INTO frequencia_francisco_8 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+          } else if ($serie == 9) {
+            $pdo->query("INSERT INTO frequencia_francisco_9 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+          }
+        } else if ($escola == 13) {
+          $pdo->query("INSERT INTO frequencia_creche SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+        } else if ($escola == 14) {
+          $pdo->query("INSERT INTO frequencia_nucleo SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+        } else if ($escola == 15) {
+          $pdo->query("INSERT INTO frequencia_horizonte SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+        } else {
+          $pdo->query("INSERT INTO frequencia_jose SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
+        }
       }
-    } else if ($escola == 13) {
-      $pdo->query("INSERT INTO frequencia_creche SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
-    } else if ($escola == 14) {
-      $pdo->query("INSERT INTO frequencia_nucleo SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
-    } else if ($escola == 15) {
-      $pdo->query("INSERT INTO frequencia_horizonte SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
-    } else {
-      $pdo->query("INSERT INTO frequencia_jose SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'P', data = curDate(), professor = '$professor'");
-    }
   }
 
   echo "<script>window.location='index.php?pag=$pag&funcao=fazerchamada&id=$id_turma_chamada&id_aula=$id_aula_chamada';</script>";
@@ -567,91 +577,96 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "falta") {
   $id_aluno_chamada = $_GET['id_aluno'];
   $id_aula_chamada = $_GET['id_aula'];
 
-  if ($escola == 12) {
-    if ($serie == 4) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_4 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 5) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_5 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 6) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_6 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 7) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_7 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 8) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_8 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 9) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_9 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    }
-  } else if ($escola == 13) {
-    $query = $pdo->query("SELECT * FROM frequencia_creche where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-  } else if ($escola == 14) {
-    $query = $pdo->query("SELECT * FROM frequencia_nucleo where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-  } else if ($escola == 15) {
-    $query = $pdo->query("SELECT * FROM frequencia_horizonte where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-  } else {
-    $query = $pdo->query("SELECT * FROM frequencia_jose where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-  }
-
-  if (@count($res) > 0) {
-    $id_chamada = $res[0]['id'];
+  $query = $pdo->query("SELECT * FROM aulas where id = '$id_aula_chamada' ");
+  $res = $query->fetchAll(PDO::FETCH_ASSOC);
+  if(count($res) > 0){
     if ($escola == 12) {
-      if ($serie == 4) {
-        $pdo->query("UPDATE frequencia_francisco_4 SET presenca = 'F' where id = '$id_chamada'");
-      } else if ($serie == 5) {
-        $pdo->query("UPDATE frequencia_francisco_5 SET presenca = 'F' where id = '$id_chamada'");
-      } else if ($serie == 6) {
-        $pdo->query("UPDATE frequencia_francisco_6 SET presenca = 'F' where id = '$id_chamada'");
-      } else if ($serie == 7) {
-        $pdo->query("UPDATE frequencia_francisco_7 SET presenca = 'F' where id = '$id_chamada'");
-      } else if ($serie == 8) {
-        $pdo->query("UPDATE frequencia_francisco_8 SET presenca = 'F' where id = '$id_chamada'");
-      } else if ($serie == 9) {
-        $pdo->query("UPDATE frequencia_francisco_9 SET presenca = 'F' where id = '$id_chamada'");
+        if ($serie == 4) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_4 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        } else if ($serie == 5) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_5 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        } else if ($serie == 6) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_6 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        } else if ($serie == 7) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_7 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        } else if ($serie == 8) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_8 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        } else if ($serie == 9) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_9 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        }
+      } else if ($escola == 13) {
+        $query = $pdo->query("SELECT * FROM frequencia_creche where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+      } else if ($escola == 14) {
+        $query = $pdo->query("SELECT * FROM frequencia_nucleo where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+      } else if ($escola == 15) {
+        $query = $pdo->query("SELECT * FROM frequencia_horizonte where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+      } else {
+        $query = $pdo->query("SELECT * FROM frequencia_jose where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
       }
-    } else if ($escola == 13) {
-      $pdo->query("UPDATE frequencia_creche SET presenca = 'F' where id = '$id_chamada'");
-    } else if ($escola == 14) {
-      $pdo->query("UPDATE frequencia_nucleo SET presenca = 'F' where id = '$id_chamada'");
-    } else if ($escola == 15) {
-      $pdo->query("UPDATE frequencia_horizonte SET presenca = 'F' where id = '$id_chamada'");
-    } else {
-      $pdo->query("UPDATE frequencia_jose SET presenca = 'F' where id = '$id_chamada'");
-    }
-  } else {
 
-    if ($escola == 12) {
-      if ($serie == 4) {
-        $pdo->query("INSERT INTO frequencia_francisco_4 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
-      } else if ($serie == 5) {
-        $pdo->query("INSERT INTO frequencia_francisco_5 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
-      } else if ($serie == 6) {
-        $pdo->query("INSERT INTO frequencia_francisco_6 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
-      } else if ($serie == 7) {
-        $pdo->query("INSERT INTO frequencia_francisco_7 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
-      } else if ($serie == 8) {
-        $pdo->query("INSERT INTO frequencia_francisco_8 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
-      } else if ($serie == 9) {
-        $pdo->query("INSERT INTO frequencia_francisco_9 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
+      if (@count($res) > 0) {
+        $id_chamada = $res[0]['id'];
+        if ($escola == 12) {
+          if ($serie == 4) {
+            $pdo->query("UPDATE frequencia_francisco_4 SET presenca = 'F' where id = '$id_chamada'");
+          } else if ($serie == 5) {
+            $pdo->query("UPDATE frequencia_francisco_5 SET presenca = 'F' where id = '$id_chamada'");
+          } else if ($serie == 6) {
+            $pdo->query("UPDATE frequencia_francisco_6 SET presenca = 'F' where id = '$id_chamada'");
+          } else if ($serie == 7) {
+            $pdo->query("UPDATE frequencia_francisco_7 SET presenca = 'F' where id = '$id_chamada'");
+          } else if ($serie == 8) {
+            $pdo->query("UPDATE frequencia_francisco_8 SET presenca = 'F' where id = '$id_chamada'");
+          } else if ($serie == 9) {
+            $pdo->query("UPDATE frequencia_francisco_9 SET presenca = 'F' where id = '$id_chamada'");
+          }
+        } else if ($escola == 13) {
+          $pdo->query("UPDATE frequencia_creche SET presenca = 'F' where id = '$id_chamada'");
+        } else if ($escola == 14) {
+          $pdo->query("UPDATE frequencia_nucleo SET presenca = 'F' where id = '$id_chamada'");
+        } else if ($escola == 15) {
+          $pdo->query("UPDATE frequencia_horizonte SET presenca = 'F' where id = '$id_chamada'");
+        } else {
+          $pdo->query("UPDATE frequencia_jose SET presenca = 'F' where id = '$id_chamada'");
+        }
+      } else {
+
+        if ($escola == 12) {
+          if ($serie == 4) {
+            $pdo->query("INSERT INTO frequencia_francisco_4 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
+          } else if ($serie == 5) {
+            $pdo->query("INSERT INTO frequencia_francisco_5 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
+          } else if ($serie == 6) {
+            $pdo->query("INSERT INTO frequencia_francisco_6 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
+          } else if ($serie == 7) {
+            $pdo->query("INSERT INTO frequencia_francisco_7 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
+          } else if ($serie == 8) {
+            $pdo->query("INSERT INTO frequencia_francisco_8 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
+          } else if ($serie == 9) {
+            $pdo->query("INSERT INTO frequencia_francisco_9 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
+          }
+        } else if ($escola == 13) {
+          $pdo->query("INSERT INTO frequencia_creche SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
+        } else if ($escola == 14) {
+          $pdo->query("INSERT INTO frequencia_nucleo SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
+        } else if ($escola == 15) {
+          $pdo->query("INSERT INTO frequencia_horizonte SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
+        } else {
+          $pdo->query("INSERT INTO frequencia_jose SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
+        }
       }
-    } else if ($escola == 13) {
-      $pdo->query("INSERT INTO frequencia_creche SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
-    } else if ($escola == 14) {
-      $pdo->query("INSERT INTO frequencia_nucleo SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
-    } else if ($escola == 15) {
-      $pdo->query("INSERT INTO frequencia_horizonte SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
-    } else {
-      $pdo->query("INSERT INTO frequencia_jose SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'F', data = curDate(), professor = '$professor'");
-    }
-  }
+
+}
 
   echo "<script>window.location='index.php?pag=$pag&funcao=fazerchamada&id=$id_turma_chamada&id_aula=$id_aula_chamada';</script>";
 }
@@ -661,91 +676,95 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "justificado") {
   $id_turma_chamada = $_GET['id'];
   $id_aluno_chamada = $_GET['id_aluno'];
   $id_aula_chamada = $_GET['id_aula'];
-
-  if ($escola == 12) {
-    if ($serie == 4) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_4 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 5) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_5 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 6) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_6 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 7) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_7 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 8) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_8 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    } else if ($serie == 9) {
-      $query = $pdo->query("SELECT * FROM frequencia_francisco_9 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-      $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    }
-  } else if ($escola == 13) {
-    $query = $pdo->query("SELECT * FROM frequencia_creche where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-  } else if ($escola == 14) {
-    $query = $pdo->query("SELECT * FROM frequencia_nucleo where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-  } else if ($escola == 15) {
-    $query = $pdo->query("SELECT * FROM frequencia_horizonte where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-  } else {
-    $query = $pdo->query("SELECT * FROM frequencia_jose where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
-    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-  }
-
-  if (@count($res) > 0) {
-    $id_chamada = $res[0]['id'];
+  $query = $pdo->query("SELECT * FROM aulas where id = '$id_aula_chamada' ");
+  $res = $query->fetchAll(PDO::FETCH_ASSOC);
+  if(count($res) > 0){
     if ($escola == 12) {
-      if ($serie == 4) {
-        $pdo->query("UPDATE frequencia_francisco_4 SET presenca = 'J' where id = '$id_chamada'");
-      } else if ($serie == 5) {
-        $pdo->query("UPDATE frequencia_francisco_5 SET presenca = 'J' where id = '$id_chamada'");
-      } else if ($serie == 6) {
-        $pdo->query("UPDATE frequencia_francisco_6 SET presenca = 'J' where id = '$id_chamada'");
-      } else if ($serie == 7) {
-        $pdo->query("UPDATE frequencia_francisco_7 SET presenca = 'J' where id = '$id_chamada'");
-      } else if ($serie == 8) {
-        $pdo->query("UPDATE frequencia_francisco_8 SET presenca = 'J' where id = '$id_chamada'");
-      } else if ($serie == 9) {
-        $pdo->query("UPDATE frequencia_francisco_9 SET presenca = 'J' where id = '$id_chamada'");
+        if ($serie == 4) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_4 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        } else if ($serie == 5) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_5 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        } else if ($serie == 6) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_6 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        } else if ($serie == 7) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_7 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        } else if ($serie == 8) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_8 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        } else if ($serie == 9) {
+          $query = $pdo->query("SELECT * FROM frequencia_francisco_9 where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        }
+      } else if ($escola == 13) {
+        $query = $pdo->query("SELECT * FROM frequencia_creche where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+      } else if ($escola == 14) {
+        $query = $pdo->query("SELECT * FROM frequencia_nucleo where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+      } else if ($escola == 15) {
+        $query = $pdo->query("SELECT * FROM frequencia_horizonte where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+      } else {
+        $query = $pdo->query("SELECT * FROM frequencia_jose where turma = '$id_turma_chamada' and aluno = '$id_aluno_chamada' and aula = '$id_aula_chamada' ");
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
       }
-    } else if ($escola == 13) {
-      $pdo->query("UPDATE frequencia_creche SET presenca = 'J' where id = '$id_chamada'");
-    } else if ($escola == 14) {
-      $pdo->query("UPDATE frequencia_nucleo SET presenca = 'J' where id = '$id_chamada'");
-    } else if ($escola == 15) {
-      $pdo->query("UPDATE frequencia_horizonte SET presenca = 'J' where id = '$id_chamada'");
-    } else {
-      $pdo->query("UPDATE frequencia_jose SET presenca = 'J' where id = '$id_chamada'");
-    }
-  } else {
 
-    if ($escola == 12) {
-      if ($serie == 4) {
-        $pdo->query("INSERT INTO frequencia_francisco_4 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
-      } else if ($serie == 5) {
-        $pdo->query("INSERT INTO frequencia_francisco_5 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
-      } else if ($serie == 6) {
-        $pdo->query("INSERT INTO frequencia_francisco_6 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
-      } else if ($serie == 7) {
-        $pdo->query("INSERT INTO frequencia_francisco_7 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
-      } else if ($serie == 8) {
-        $pdo->query("INSERT INTO frequencia_francisco_8 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
-      } else if ($serie == 9) {
-        $pdo->query("INSERT INTO frequencia_francisco_9 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
+      if (@count($res) > 0) {
+        $id_chamada = $res[0]['id'];
+        if ($escola == 12) {
+          if ($serie == 4) {
+            $pdo->query("UPDATE frequencia_francisco_4 SET presenca = 'J' where id = '$id_chamada'");
+          } else if ($serie == 5) {
+            $pdo->query("UPDATE frequencia_francisco_5 SET presenca = 'J' where id = '$id_chamada'");
+          } else if ($serie == 6) {
+            $pdo->query("UPDATE frequencia_francisco_6 SET presenca = 'J' where id = '$id_chamada'");
+          } else if ($serie == 7) {
+            $pdo->query("UPDATE frequencia_francisco_7 SET presenca = 'J' where id = '$id_chamada'");
+          } else if ($serie == 8) {
+            $pdo->query("UPDATE frequencia_francisco_8 SET presenca = 'J' where id = '$id_chamada'");
+          } else if ($serie == 9) {
+            $pdo->query("UPDATE frequencia_francisco_9 SET presenca = 'J' where id = '$id_chamada'");
+          }
+        } else if ($escola == 13) {
+          $pdo->query("UPDATE frequencia_creche SET presenca = 'J' where id = '$id_chamada'");
+        } else if ($escola == 14) {
+          $pdo->query("UPDATE frequencia_nucleo SET presenca = 'J' where id = '$id_chamada'");
+        } else if ($escola == 15) {
+          $pdo->query("UPDATE frequencia_horizonte SET presenca = 'J' where id = '$id_chamada'");
+        } else {
+          $pdo->query("UPDATE frequencia_jose SET presenca = 'J' where id = '$id_chamada'");
+        }
+      } else {
+
+        if ($escola == 12) {
+          if ($serie == 4) {
+            $pdo->query("INSERT INTO frequencia_francisco_4 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
+          } else if ($serie == 5) {
+            $pdo->query("INSERT INTO frequencia_francisco_5 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
+          } else if ($serie == 6) {
+            $pdo->query("INSERT INTO frequencia_francisco_6 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
+          } else if ($serie == 7) {
+            $pdo->query("INSERT INTO frequencia_francisco_7 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
+          } else if ($serie == 8) {
+            $pdo->query("INSERT INTO frequencia_francisco_8 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
+          } else if ($serie == 9) {
+            $pdo->query("INSERT INTO frequencia_francisco_9 SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
+          }
+        } else if ($escola == 13) {
+          $pdo->query("INSERT INTO frequencia_creche SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
+        } else if ($escola == 14) {
+          $pdo->query("INSERT INTO frequencia_nucleo SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
+        } else if ($escola == 15) {
+          $pdo->query("INSERT INTO frequencia_horizonte SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
+        } else {
+          $pdo->query("INSERT INTO frequencia_jose SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
+        }
       }
-    } else if ($escola == 13) {
-      $pdo->query("INSERT INTO frequencia_creche SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
-    } else if ($escola == 14) {
-      $pdo->query("INSERT INTO frequencia_nucleo SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
-    } else if ($escola == 15) {
-      $pdo->query("INSERT INTO frequencia_horizonte SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
-    } else {
-      $pdo->query("INSERT INTO frequencia_jose SET turma = '$id_turma_chamada', aluno =  '$id_aluno_chamada', aula = '$id_aula_chamada', presenca = 'J', data = curDate(), professor = '$professor'");
-    }
+
   }
 
   echo "<script>window.location='index.php?pag=$pag&funcao=fazerchamada&id=$id_turma_chamada&id_aula=$id_aula_chamada';</script>";
@@ -762,8 +781,26 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "justificado") {
         "info": "Mostrando página _PAGE_ de _PAGES_",
         "infoEmpty": "Nenhum registro disponível",
         "infoFiltered": "(filtrado de _MAX_ registros no total)"
-      }
+      }, stateSave: true,
 
     });
   });
 </script>
+
+<script>
+  $(document).ready(function() {
+    $('#dataTable2').DataTable({
+      "language": {
+        "lengthMenu": "Mostrando _MENU_ registros por página",
+        "zeroRecords": "Nada encontrado",
+        "info": " ",
+        "infoEmpty": "Nenhum registro disponível",
+        "infoFiltered": "(filtrado de _MAX_ registros no total)"
+      }, stateSave: true,
+      "paging": false
+
+    });
+  });
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5544089876216624" crossorigin="anonymous"></script>

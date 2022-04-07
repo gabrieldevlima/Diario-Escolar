@@ -15,7 +15,7 @@ if (@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'secretar
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="minhaTabela" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>COMPONENTE CURRICULAR</th>
@@ -218,11 +218,17 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "matriculados") {
 
 ?>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#dataTable').dataTable({
-            "ordering": false
-        })
+<script>
+  $(document).ready(function() {
+    $('#minhaTabela').DataTable({
+      "language": {
+        "lengthMenu": "Mostrando _MENU_ registros por página",
+        "zeroRecords": "Nada encontrado",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "infoEmpty": "Nenhum registro disponível",
+        "infoFiltered": "(filtrado de _MAX_ registros no total)"
+      }, stateSave: true,
 
     });
+  });
 </script>

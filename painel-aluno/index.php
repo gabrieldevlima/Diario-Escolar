@@ -1,6 +1,6 @@
-<?php 
+<?php
 @session_start();
-require_once("../conexao.php"); 
+require_once("../conexao.php");
 
     //variaveis para o menu
 $pag = @$_GET["pag"];
@@ -19,7 +19,7 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $nome_usu = @$res[0]['nome'];
 $cpf_usu = @$res[0]['cpf'];
 $email_usu = @$res[0]['email'];
-$idUsuario = @$res[0]['id'];  
+$idUsuario = @$res[0]['id'];
 
 ?>
 
@@ -64,7 +64,7 @@ $idUsuario = @$res[0]['id'];
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-dark accordion" style="background: rgb(15,45,8); background: linear-gradient(180deg, rgba(15,45,8,1) 0%, rgba(0,60,22,1) 26%, rgba(9,121,45,1) 100%);" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
@@ -87,7 +87,7 @@ $idUsuario = @$res[0]['id'];
 
 
 
-            <?php 
+            <?php
 
             $query = $pdo->query("SELECT * FROM alunos where cpf = '$cpf_usu' ");
             $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -97,7 +97,7 @@ $idUsuario = @$res[0]['id'];
             $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
 
-            for ($i=0; $i < count($res); $i++) { 
+            for ($i=0; $i < count($res); $i++) {
               foreach ($res[$i] as $key => $value) {
               }
 
@@ -107,7 +107,7 @@ $idUsuario = @$res[0]['id'];
 
               $query_2 = $pdo->query("SELECT * FROM turmas where id = '$id_turma' and data_final > curDate() order by data_final desc ");
               $res_2 = $query_2->fetchAll(PDO::FETCH_ASSOC);
-              
+
               if(@count($res_2)>0){
               $disciplina = @$res_2[0]['disciplina'];
               $horario = @$res_2[0]['horario'];
@@ -124,7 +124,7 @@ $idUsuario = @$res[0]['id'];
 
 
 
-              ?> 
+              ?>
 
               <!-- Nav Item - Charts -->
               <li class="nav-item">
@@ -205,12 +205,12 @@ $idUsuario = @$res[0]['id'];
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <?php if (@$pag == null) { 
-                        @include_once("home.php"); 
-                        
+                    <?php if (@$pag == null) {
+                        @include_once("home.php");
+
                     } else if (@$pag==$menu1) {
                         @include_once(@$menu1.".php");
-                        
+
                     } else if (@$pag==$menu2) {
                         @include_once(@$menu2.".php");
 
@@ -229,7 +229,7 @@ $idUsuario = @$res[0]['id'];
 
                     } else if (@$pag=='turma') {
                         @include_once("turma.php");
-                        
+
                     } else {
                         @include_once("home.php");
                     }

@@ -27,15 +27,13 @@ $escola = $res_adm[0]['escola'];
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="minhaTabela" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>COMPONENTE CURRICULAR</th>
                         <th>ESCOLA</th>
-                        <th>ANO/SÉRIE</th>
                         <th>TURMA</th>
-                        <th>Nº DE AULAS</th>
-                        <th>PENDENTE</th>
+                        <th>AULAS REGISTRADAS</th>
                         <th>AÇÕES</th>
                     </tr>
                 </thead>
@@ -60,22 +58,13 @@ $escola = $res_adm[0]['escola'];
                         $sala = $res[$i]['sala'];
                         $serie = $res[$i]['serie'];
                         $letraturma = $res[$i]['letraturma'];
-                        @$horario = $res[$i]['horario'];
                         $dia = $res[$i]['dia'];
                         $id = $res[$i]['id'];
+                        @$horario = $res[$i]['horario'];
 
                         $query_a = $pdo->query("SELECT * FROM aulas where turma =  '$id'");
                         $res_a = $query_a->fetchAll(PDO::FETCH_ASSOC);
                         $qtd_aulas = count($res_a);
-
-                        $query_v = $pdo->query("SELECT * FROM validadas where turma =  '$id'");
-                        $res_v = $query_v->fetchAll(PDO::FETCH_ASSOC);
-                        $qtd_validadas = count($res_v);
-
-                        $faltavalidar = $qtd_aulas - $qtd_validadas;
-                        if ($faltavalidar < 0) {
-                            $faltavalidar = 0;
-                        }
 
                         //RECUPERAR NOME DISCIPLINA
                         $query_r = $pdo->query("SELECT * FROM disciplinas where id =  '$disciplina'");
@@ -95,15 +84,13 @@ $escola = $res_adm[0]['escola'];
                         <tr>
                             <td><?php echo $nome_disc ?></td>
                             <td><?php echo $nome_sala ?></td>
-                            <td><?php echo $serie ?></td>
-                            <td><?php echo $letraturma ?></td>
+                            <td><?php echo $serie.' - '.$letraturma ?></td>
                             <td><?php echo $qtd_aulas ?></td>
-                            <td><?php echo $faltavalidar ?></td>
 
                             <td>
                                 <a href="index.php?pag=<?php echo $pag ?>&funcao=endereco&id=<?php echo $id ?>" class='text-info mr-1' title='Mais Informações'><i class='fas fa-info-circle fa-lg'></i></a>
                                 <a href="index.php?pag=<?php echo $pag ?>&funcao=validada&id=<?php echo $id ?>" class='text-success mr-1' title='Validar Aulas'><i class='fas fa-chalkboard-teacher fa-lg'></i></a>
-                                <a href="index.php?pag=aulas&funcao=relfrequencia&id=<?php echo $id ?>"" class='text-secondary mr-1' title='Gerar Relatório de Frequência'><i class='fas fa-calendar-alt fa-lg'></i></a>
+                                <a href="index.php?pag=aulas&funcao=relfrequencia&id=<?php echo $id ?>"" class='text-dark mr-1' title='Gerar Relatório de Frequência'><i class='fas fa-calendar-alt fa-lg'></i></a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -381,7 +368,7 @@ $escola = $res_adm[0]['escola'];
                             $sala3 = $res[0]['sala'];
                             $serie3 = $res[0]['serie'];
                             $professor3 = $res[0]['professor'];
-                            $horario3 = $res[0]['horario'];
+                            @$horario3 = $res[0]['horario'];
                             $dia3 = $res[0]['dia'];
                             $data_inicio3 = $res[0]['data_inicio'];
                             $data_final3 = $res[0]['data_final'];
@@ -443,7 +430,7 @@ $escola = $res_adm[0]['escola'];
 
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                                    <table class="table table-bordered" id="minhaTabela2" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>Nº</th>
@@ -827,11 +814,34 @@ $escola = $res_adm[0]['escola'];
         </script>
 
 
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#dataTable').dataTable({
-                    "ordering": false
-                })
+<script>
+  $(document).ready(function() {
+    $('#minhaTabela').DataTable({
+      "language": {
+        "lengthMenu": "Mostrando _MENU_ registros por página",
+        "zeroRecords": "Nada encontrado",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "infoEmpty": "Nenhum registro disponível",
+        "infoFiltered": "(filtrado de _MAX_ registros no total)"
+      }, stateSave: true,
 
-            });
-        </script>
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $('#minhaTabela2').DataTable({
+      "language": {
+        "lengthMenu": "Mostrando _MENU_ registros por página",
+        "zeroRecords": "Nada encontrado",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "infoEmpty": "Nenhum registro disponível",
+        "infoFiltered": "(filtrado de _MAX_ registros no total)"
+      }, stateSave: true,
+
+    });
+  });
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5544089876216624" crossorigin="anonymous"></script>

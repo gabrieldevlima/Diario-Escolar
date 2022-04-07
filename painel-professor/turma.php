@@ -53,7 +53,7 @@ $total_aulas = @count($res_resp);
 <div class="row">
 
 <div class="col-xl-4 col-md-6 mb-4">
-    <a class="text-dark" href="index.php?pag=aula&funcao=aulas&id=<?php echo $id_turma ?>&aulas=sim" title="Lançar Aulas">
+    <a style="text-decoration : none" class="text-dark" href="index.php?pag=aula&funcao=aulas&id=<?php echo $id_turma ?>&aulas=sim" title="Lançar Aulas">
       <div class="card text-info shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -72,7 +72,7 @@ $total_aulas = @count($res_resp);
   </div>
 
   <div class="col-xl-4 col-md-6 mb-4">
-    <a class="text-dark" href="index.php?pag=frequencia&funcao=chamada&id=<?php echo $id_turma ?>&chamada=sim" title="Registrar Frequência">
+    <a style="text-decoration : none" class="text-dark" href="index.php?pag=frequencia&funcao=chamada&id=<?php echo $id_turma ?>&chamada=sim" title="Registrar Frequência">
       <div class="card text-warning shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -91,7 +91,7 @@ $total_aulas = @count($res_resp);
   </div>
 
   <div class="col-xl-4 col-md-6 mb-4">
-    <a class="text-dark" href="index.php?pag=nota&funcao=notas&id=<?php echo $id_turma ?>&notas=sim" title="Registrar Nota">
+    <a style="text-decoration : none" class="text-dark" href="index.php?pag=nota&funcao=notas&id=<?php echo $id_turma ?>&notas=sim" title="Registrar Nota">
       <div class="card text-success shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -109,3 +109,4 @@ $total_aulas = @count($res_resp);
     </a>
   </div>
 </div>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5544089876216624" crossorigin="anonymous"></script>

@@ -230,198 +230,194 @@ $nome_componente = $res_c[0]['nome'];
         ?>
 
         <div class="cabecalho">
-
+            <a style="float: right;" href="https://www.printfriendly.com" style="color:#6D9F00;text-decoration:none;" class="printfriendly" onclick="window.print();return false;" title="Printer Friendly and PDF"><img style="border:none;-webkit-box-shadow:none;box-shadow:none;" src="//cdn.printfriendly.com/buttons/printfriendly-pdf-email-button-md.png" alt="Print Friendly and PDF" /></a>
             <div class="row titulos">
-                <div class="col-sm-2 esquerda_float image">
-                    <img src="../img/logo-francisco.png" width="170px">
-                </div>
-                <div class="col-sm-15 esquerda_float">
+                <div class="col-sm-10  esquerda_float">
+                    <img style="float: left" src="../img/logo-francisco.png" width="210px" class="rounded float-left" alt="Responsive image">
+                    <img style="float: right" src=" ../img/logo2.png" width="200px" class="rounded float-right" alt="Responsive image">
                     <h2 class="titulo"><b><?php echo strtoupper($nome_sec) ?></b></h2>
                     <h6 class="subtitulo"><?php echo 'Unidade Escolar: ' . $nome_escola ?></h6>
                     <h6 class="subtitulo"><?php echo 'Componente Curricular: ' . $nome_componente ?></h6>
                     <h6 class="subtitulo"><?php echo 'Curso: <b> Ensino Fundamental </b> &nbsp&nbsp&nbsp Ano de Ensino: <b>'  . $anoensino . '</b>&nbsp&nbsp&nbsp&nbsp Turma: <b>' . $letraturma . '</b>&nbsp&nbsp&nbsp Turno: <b>' . $turno . '</b>&nbsp&nbsp&nbsp Ano: <b>' . $ano . '</b>' ?></h6>
                     <h6 class="subtitulo"><?php echo 'PROFESSOR(A): ' . $nome_prof ?></h6>
-                    <div>
-                        <img style="margin-right: 2rem" align="right"">
-		</div>
-	</div>
-
-	<div>
-		<img src=" ../img/logo2.png" width="200px" style="margin-right: 2rem" align="right"">
-	</div>
-</div>
-
-
-</div>
-
-		<div class=" container">
-
-                        <hr>
-
-                        <p align="center"><b>ANOTAÇÃO DA FREQUÊNCIA DE AULAS DO MÊS DE <?php echo $nome_mes ?> </b></p>
-                        <br>
-
-
-                        <div class="card shadow mb-4">
-
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>ALUNO</th>
-                                                <?php
-
-                                                $query = $pdo->query("SELECT * FROM aulas where turma = '$id' order by data");
-                                                $res = $query->fetchAll(PDO::FETCH_ASSOC);
-
-                                                for ($i = 0; $i < count($res); $i++) {
-                                                    foreach ($res[$i] as $key => $value) {
-                                                    }
-
-                                                    $data = $res[$i]['data'];
-                                                    $partes = explode("-", $data);
-                                                    $ano = $partes[0];
-                                                    $mes = $partes[1];
-                                                    $dia = $partes[2];
-                                                    $qtd_aulas = $i + 1;
-                                                    if ($mes == $m) {
-                                                        echo '<th>' . $dia . '</th>';
-                                                    }
-                                                } ?>
-
-
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-
-
-
-                                            <?php
-
-                                            $query = $pdo->query("SELECT * FROM matriculas where turma = '$id' order by id desc ");
-                                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
-
-                                            for ($i = 0; $i < count($res); $i++) {
-                                                foreach ($res[$i] as $key => $value) {
-                                                }
-
-                                                echo '<tr>';
-
-                                                $aluno = $res[$i]['aluno'];
-
-                                                $query_a = $pdo->query("SELECT * FROM alunos where id = '$aluno' ");
-                                                $res_a = $query_a->fetchAll(PDO::FETCH_ASSOC);
-                                                if(count($res_a) < 1){
-                                                    $pdo->query("DELETE FROM matriculas WHERE aluno = '$aluno'");
-                                                    $pdo->query("DELETE FROM notas WHERE aluno = '$aluno'");
-                                                    continue;
-                                                }
-
-                                                $nome_aluno = $res_a[0]['nome'];
-
-                                                echo '<td>' . $nome_aluno . '</td>';
-                                                if ($anoensino == 4) {
-                                                    $query_t = $pdo->query("SELECT * FROM frequencia_francisco_4 where aluno = $aluno and turma = $id order by data");
-                                                    $res_t = $query_t->fetchAll(PDO::FETCH_ASSOC);
-                                                } else if ($anoensino == 5) {
-                                                    $query_t = $pdo->query("SELECT * FROM frequencia_francisco_5 where aluno = $aluno and turma = $id order by data");
-                                                    $res_t = $query_t->fetchAll(PDO::FETCH_ASSOC);
-                                                } else if ($anoensino == 6) {
-                                                    $query_t = $pdo->query("SELECT * FROM frequencia_francisco_6 where aluno = $aluno and turma = $id order by data");
-                                                    $res_t = $query_t->fetchAll(PDO::FETCH_ASSOC);
-                                                } else if ($anoensino == 7) {
-                                                    $query_t = $pdo->query("SELECT * FROM frequencia_francisco_7 where aluno = $aluno and turma = $id order by data");
-                                                    $res_t = $query_t->fetchAll(PDO::FETCH_ASSOC);
-                                                } else if ($anoensino == 8) {
-                                                    $query_t = $pdo->query("SELECT * FROM frequencia_francisco_8 where aluno = $aluno and turma = $id order by data");
-                                                    $res_t = $query_t->fetchAll(PDO::FETCH_ASSOC);
-                                                } else if ($anoensino == 9) {
-                                                    $query_t = $pdo->query("SELECT * FROM frequencia_francisco_9 where aluno = $aluno and turma = $id order by data");
-                                                    $res_t = $query_t->fetchAll(PDO::FETCH_ASSOC);
-                                                }
-
-                                                for ($j = 0; $j < count($res_t); $j++) {
-                                                    foreach ($res_t[$j] as $key => $value) {
-                                                    }
-                                                    $id_cha = $res_t[$j]['id'];
-                                                    $aula = $res_t[$j]['aula'];
-                                                    $query_aula = $pdo->query("SELECT * FROM aulas where id = $aula");
-                                                    $res_aula = $query_aula->fetchAll(PDO::FETCH_ASSOC);
-                                                    @$aula_id = $res_aula[0]['id'];
-                                                    if ($aula != $aula_id) {
-                                                        if ($anoensino == 4) {
-                                                            $pdo->query("DELETE FROM frequencia_francisco_4 WHERE aula = '$aula'");
-                                                        } else if ($anoensino == 5) {
-                                                            $pdo->query("DELETE FROM frequencia_francisco_5 WHERE aula = '$aula'");
-                                                        } else if ($anoensino == 6) {
-                                                            $pdo->query("DELETE FROM frequencia_francisco_6 WHERE aula = '$aula'");
-                                                        } else if ($anoensino == 7) {
-                                                            $pdo->query("DELETE FROM frequencia_francisco_7 WHERE aula = '$aula'");
-                                                        } else if ($anoensino == 8) {
-                                                            $pdo->query("DELETE FROM frequencia_francisco_8 WHERE aula = '$aula'");
-                                                        } else if ($anoensino == 9) {
-                                                            $pdo->query("DELETE FROM frequencia_francisco_9 WHERE aula = '$aula'");
-                                                        }
-                                                        continue;
-                                                    }
-                                                    $data_aula = $res_aula[0]['data'];
-                                                    if ($anoensino == 4) {
-                                                        $pdo->query("UPDATE frequencia_francisco_4 SET data = '$data_aula' where id = '$id_cha'");
-                                                    } else if ($anoensino == 5) {
-                                                        $pdo->query("UPDATE frequencia_francisco_5 SET data = '$data_aula' where id = '$id_cha'");
-                                                    } else if ($anoensino == 6) {
-                                                        $pdo->query("UPDATE frequencia_francisco_6 SET data = '$data_aula' where id = '$id_cha'");
-                                                    } else if ($anoensino == 7) {
-                                                        $pdo->query("UPDATE frequencia_francisco_7 SET data = '$data_aula' where id = '$id_cha'");
-                                                    } else if ($anoensino == 8) {
-                                                        $pdo->query("UPDATE frequencia_francisco_8 SET data = '$data_aula' where id = '$id_cha'");
-                                                    } else if ($anoensino == 9) {
-                                                        $pdo->query("UPDATE frequencia_francisco_9 SET data = '$data_aula' where id = '$id_cha'");
-                                                    }
-                                                    $presenca = $res_t[$j]['presenca'];
-                                                    $partes = explode("-", $data_aula);
-                                                    $mes = $partes[1];
-                                                    if ($mes == $m) {
-                                                        echo '<td style="text-align: center;">' . $presenca . '</td>';
-                                                    }
-                                                }
-                                                echo '</tr>';
-                                            }
-
-                                            ?>
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <footer align="center">
-                        <img src="../img/assinatura.PNG" width="650rem">
-                    </footer>
                 </div>
+            </div>
+        </div>
 
-    </body>
-    <p style="text-align:center">
-        <input class="btn btn-light" type="button" value="Gerar PDF" onclick="funcao_pdf()">
-    </p>
+        <div class=" container">
+
+            <hr>
+
+            <p align="center"><b>ANOTAÇÃO DA FREQUÊNCIA DE AULAS DO MÊS DE <?php echo $nome_mes ?> </b></p>
+            <br>
+
+
+            <div align="center" class="card shadow mb-4">
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>ALUNO</th>
+                                    <?php
+
+                                    $query = $pdo->query("SELECT * FROM aulas where turma = '$id' order by data");
+                                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                                    for ($i = 0; $i < count($res); $i++) {
+                                        foreach ($res[$i] as $key => $value) {
+                                        }
+
+                                        $data = $res[$i]['data'];
+                                        $partes = explode("-", $data);
+                                        $ano = $partes[0];
+                                        $mes = $partes[1];
+                                        $dia = $partes[2];
+                                        $qtd_aulas = $i + 1;
+                                        if ($mes == $m) {
+                                            echo '<th>' . $dia . '</th>';
+                                        }
+                                    } ?>
+
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+
+
+                                <?php
+
+                                $query = $pdo->query("SELECT * FROM matriculas where turma = '$id' order by id desc ");
+                                $res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                                for ($i = 0; $i < count($res); $i++) {
+                                    foreach ($res[$i] as $key => $value) {
+                                    }
+
+                                    echo '<tr>';
+
+                                    $aluno = $res[$i]['aluno'];
+
+                                    $query_a = $pdo->query("SELECT * FROM alunos where id = '$aluno' ");
+                                    $res_a = $query_a->fetchAll(PDO::FETCH_ASSOC);
+                                    if (count($res_a) < 1) {
+                                        $pdo->query("DELETE FROM matriculas WHERE aluno = '$aluno'");
+                                        $pdo->query("DELETE FROM notas WHERE aluno = '$aluno'");
+                                        continue;
+                                    }
+
+                                    $nome_aluno = $res_a[0]['nome'];
+
+                                    echo '<td>' . $nome_aluno . '</td>';
+                                    if ($anoensino == 4) {
+                                        $query_t = $pdo->query("SELECT * FROM frequencia_francisco_4 where aluno = $aluno and turma = $id order by data");
+                                        $res_t = $query_t->fetchAll(PDO::FETCH_ASSOC);
+                                    } else if ($anoensino == 5) {
+                                        $query_t = $pdo->query("SELECT * FROM frequencia_francisco_5 where aluno = $aluno and turma = $id order by data");
+                                        $res_t = $query_t->fetchAll(PDO::FETCH_ASSOC);
+                                    } else if ($anoensino == 6) {
+                                        $query_t = $pdo->query("SELECT * FROM frequencia_francisco_6 where aluno = $aluno and turma = $id order by data");
+                                        $res_t = $query_t->fetchAll(PDO::FETCH_ASSOC);
+                                    } else if ($anoensino == 7) {
+                                        $query_t = $pdo->query("SELECT * FROM frequencia_francisco_7 where aluno = $aluno and turma = $id order by data");
+                                        $res_t = $query_t->fetchAll(PDO::FETCH_ASSOC);
+                                    } else if ($anoensino == 8) {
+                                        $query_t = $pdo->query("SELECT * FROM frequencia_francisco_8 where aluno = $aluno and turma = $id order by data");
+                                        $res_t = $query_t->fetchAll(PDO::FETCH_ASSOC);
+                                    } else if ($anoensino == 9) {
+                                        $query_t = $pdo->query("SELECT * FROM frequencia_francisco_9 where aluno = $aluno and turma = $id order by data");
+                                        $res_t = $query_t->fetchAll(PDO::FETCH_ASSOC);
+                                    }
+
+                                    for ($j = 0; $j < count($res_t); $j++) {
+                                        foreach ($res_t[$j] as $key => $value) {
+                                        }
+                                        $id_cha = $res_t[$j]['id'];
+                                        $aula = $res_t[$j]['aula'];
+                                        $query_aula = $pdo->query("SELECT * FROM aulas where id = $aula");
+                                        $res_aula = $query_aula->fetchAll(PDO::FETCH_ASSOC);
+                                        @$aula_id = $res_aula[0]['id'];
+                                        if ($aula != $aula_id) {
+                                            if ($anoensino == 4) {
+                                                $pdo->query("DELETE FROM frequencia_francisco_4 WHERE aula = '$aula'");
+                                            } else if ($anoensino == 5) {
+                                                $pdo->query("DELETE FROM frequencia_francisco_5 WHERE aula = '$aula'");
+                                            } else if ($anoensino == 6) {
+                                                $pdo->query("DELETE FROM frequencia_francisco_6 WHERE aula = '$aula'");
+                                            } else if ($anoensino == 7) {
+                                                $pdo->query("DELETE FROM frequencia_francisco_7 WHERE aula = '$aula'");
+                                            } else if ($anoensino == 8) {
+                                                $pdo->query("DELETE FROM frequencia_francisco_8 WHERE aula = '$aula'");
+                                            } else if ($anoensino == 9) {
+                                                $pdo->query("DELETE FROM frequencia_francisco_9 WHERE aula = '$aula'");
+                                            }
+                                            continue;
+                                        }
+                                        $data_aula = $res_aula[0]['data'];
+                                        if ($anoensino == 4) {
+                                            $pdo->query("UPDATE frequencia_francisco_4 SET data = '$data_aula' where id = '$id_cha'");
+                                        } else if ($anoensino == 5) {
+                                            $pdo->query("UPDATE frequencia_francisco_5 SET data = '$data_aula' where id = '$id_cha'");
+                                        } else if ($anoensino == 6) {
+                                            $pdo->query("UPDATE frequencia_francisco_6 SET data = '$data_aula' where id = '$id_cha'");
+                                        } else if ($anoensino == 7) {
+                                            $pdo->query("UPDATE frequencia_francisco_7 SET data = '$data_aula' where id = '$id_cha'");
+                                        } else if ($anoensino == 8) {
+                                            $pdo->query("UPDATE frequencia_francisco_8 SET data = '$data_aula' where id = '$id_cha'");
+                                        } else if ($anoensino == 9) {
+                                            $pdo->query("UPDATE frequencia_francisco_9 SET data = '$data_aula' where id = '$id_cha'");
+                                        }
+                                        $presenca = $res_t[$j]['presenca'];
+                                        $partes = explode("-", $data_aula);
+                                        $mes = $partes[1];
+                                        if ($mes == $m) {
+                                            echo '<td style="text-align: center;">' . $presenca . '</td>';
+                                        }
+                                    }
+                                    echo '</tr>';
+                                }
+
+                                ?>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <footer align="center">
+            <img src="../img/assinatura.PNG" width="650rem">
+        </footer>
+</div>
+
+</body>
+</div>
 
 </html>
 
 <script>
-    function funcao_pdf() {
-        var pegar_dados = document.getElementById('tabela').innerHTML;
-
-        var janela = window.open('', '', 'width=100px', 'heigth=80px');
-        janela.document.write('<htm><head>');
-        janela.document.write('<title>PDF</title></head>');
-        janela.document.write('<body style="font-family: Arial; font-size: 12px;"');
-        janela.document.write(pegar_dados);
-        janela.document.write('</body></html>');
-        janela.print();
-    }
+    var pfHeaderImgUrl = '';
+    var pfHeaderTagline = '';
+    var pfdisableClickToDel = 1;
+    var pfHideImages = 0;
+    var pfImageDisplayStyle = 'none';
+    var pfDisablePDF = 0;
+    var pfDisableEmail = 0;
+    var pfDisablePrint = 0;
+    var pfCustomCSS = 'href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"';
+    var pfEncodeImages = 0;
+    var pfShowHiddenContent = 0;
+    var pfBtVersion = '2';
+    (function() {
+        var js, pf;
+        pf = document.createElement('script');
+        pf.type = 'text/javascript';
+        pf.src = '//cdn.printfriendly.com/printfriendly.js';
+        document.getElementsByTagName('head')[0].appendChild(pf)
+    })();
 </script>

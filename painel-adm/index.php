@@ -1,8 +1,8 @@
-<?php 
+<?php
 @session_start();
-require_once("../conexao.php"); 
+require_once("../conexao.php");
 
-    //variaveis para o menu
+//variaveis para o menu
 $pag = @$_GET["pag"];
 $menu1 = "secretario";
 $menu2 = "professores";
@@ -14,13 +14,13 @@ $menu7 = "turmas";
 $menu8 = "aula";
 
 
-    //RECUPERAR DADOS DO USUÁRIO
+//RECUPERAR DADOS DO USUÁRIO
 $query = $pdo->query("SELECT * FROM usuarios where id = '$_SESSION[id_usuario]'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $nome_usu = @$res[0]['nome'];
 $cpf_usu = @$res[0]['cpf'];
 $email_usu = @$res[0]['email'];
-$idUsuario = @$res[0]['id'];  
+$idUsuario = @$res[0]['id'];
 
 ?>
 
@@ -35,9 +35,9 @@ $idUsuario = @$res[0]['id'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="Hugo Vasconcelos">
+    <meta name="author" content="Gabriel Lima">
 
-    <title>Painel Administrador | SEMED</title>
+    <title>Painel ADM | SEMED</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -46,14 +46,14 @@ $idUsuario = @$res[0]['id'];
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
-    
+
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 
     <!-- Bootstrap core JavaScript-->
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    
+
     <link rel="shortcut icon" href="../img/icon.ico" type="image/x-icon">
     <link rel="icon" href="../img/icon.ico" type="image/x-icon">
 
@@ -95,7 +95,7 @@ $idUsuario = @$res[0]['id'];
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        
+
                         <a class="collapse-item" href="index.php?pag=<?php echo $menu1 ?>">Secretários</a>
                         <a class="collapse-item" href="index.php?pag=<?php echo $menu2 ?>">Professores</a>
                         <a class="collapse-item" href="index.php?pag=<?php echo $menu3 ?>">Auxiliares Administrativos</a>
@@ -112,7 +112,7 @@ $idUsuario = @$res[0]['id'];
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                     
+
                         <a class="collapse-item" href="index.php?pag=<?php echo $menu5 ?>">Componentes Curriculares</a>
                         <a class="collapse-item" href="index.php?pag=<?php echo $menu7 ?>">Turmas</a>
                         <a class="collapse-item" href="index.php?pag=<?php echo $menu8 ?>">Tipos de Aula</a>
@@ -128,7 +128,7 @@ $idUsuario = @$res[0]['id'];
                 </a>
                 <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                     
+
                         <a class="collapse-item" href="index.php?pag=<?php echo $menu6 ?>">Escolas</a>
 
                     </div>
@@ -201,40 +201,30 @@ $idUsuario = @$res[0]['id'];
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <?php if (@$pag == null) { 
-                        @include_once("home.php"); 
-                        
-                    } else if (@$pag==$menu1) {
-                        @include_once(@$menu1.".php");
-                        
-                    } else if (@$pag==$menu2) {
-                        @include_once(@$menu2.".php");
-
-                    } else if (@$pag==$menu3) {
-                        include_once(@$menu3.".php");
-
-                    } else if (@$pag==$menu4) {
-                        @include_once(@$menu4.".php");
-
-                    } else if (@$pag==$menu5) {
-                        @include_once(@$menu5.".php");
-
-                    } else if (@$pag==$menu6) {
-                        @include_once(@$menu6.".php");
-
-                    } else if (@$pag==$menu7) {
-                        @include_once(@$menu7.".php");
-
-                    } else if (@$pag==$menu8) {
-                        @include_once(@$menu8.".php");
-                        
-                        
+                    <?php if (@$pag == null) {
+                        @include_once("home.php");
+                    } else if (@$pag == $menu1) {
+                        @include_once(@$menu1 . ".php");
+                    } else if (@$pag == $menu2) {
+                        @include_once(@$menu2 . ".php");
+                    } else if (@$pag == $menu3) {
+                        include_once(@$menu3 . ".php");
+                    } else if (@$pag == $menu4) {
+                        @include_once(@$menu4 . ".php");
+                    } else if (@$pag == $menu5) {
+                        @include_once(@$menu5 . ".php");
+                    } else if (@$pag == $menu6) {
+                        @include_once(@$menu6 . ".php");
+                    } else if (@$pag == $menu7) {
+                        @include_once(@$menu7 . ".php");
+                    } else if (@$pag == $menu8) {
+                        @include_once(@$menu8 . ".php");
                     } else {
                         @include_once("home.php");
                     }
                     ?>
-                    
-                    
+
+
 
                 </div>
                 <!-- /.container-fluid -->
@@ -255,9 +245,6 @@ $idUsuario = @$res[0]['id'];
         <i class="fas fa-angle-up"></i>
     </a>
 
-
-
-
     <!--  Modal Perfil-->
     <div class="modal fade" id="ModalPerfil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -274,28 +261,26 @@ $idUsuario = @$res[0]['id'];
                 <form id="form-perfil" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
 
-                     
+
                         <div class="form-group">
-                            <label >Nome</label>
+                            <label>Nome</label>
                             <input value="<?php echo $nome_usu ?>" type="text" class="form-control" id="nome_usu" name="nome_usu" placeholder="Nome">
                         </div>
 
                         <div class="form-group">
-                            <label >CPF</label>
+                            <label>CPF</label>
                             <input value="<?php echo $cpf_usu ?>" type="text" class="form-control" id="cpf_usu" name="cpf_usu" placeholder="CPF">
                         </div>
 
                         <div class="form-group">
-                            <label >Email</label>
+                            <label>Email</label>
                             <input value="<?php echo $email_usu ?>" type="email" class="form-control" id="email_usu" name="email_usu" placeholder="Email">
                         </div>
 
                         <div class="form-group">
-                            <label >Senha</label>
+                            <label>Senha</label>
                             <input value="" type="password" class="form-control" id="senha_usu" name="senha_usu" placeholder="Senha">
                         </div>
-                        
-
 
 
                         <small>
@@ -352,14 +337,10 @@ $idUsuario = @$res[0]['id'];
 
 </html>
 
-
-
-
-
 <!--AJAX PARA INSERÇÃO E EDIÇÃO DOS DADOS COM IMAGEM -->
 <script type="text/javascript">
-    $("#form-perfil").submit(function () {
-     
+    $("#form-perfil").submit(function() {
+
         event.preventDefault();
         var formData = new FormData(this);
 
@@ -368,7 +349,7 @@ $idUsuario = @$res[0]['id'];
             type: 'POST',
             data: formData,
 
-            success: function (mensagem) {
+            success: function(mensagem) {
 
                 $('#mensagem-perfil').removeClass()
 
@@ -391,10 +372,10 @@ $idUsuario = @$res[0]['id'];
             cache: false,
             contentType: false,
             processData: false,
-            xhr: function () {  // Custom XMLHttpRequest
+            xhr: function() { // Custom XMLHttpRequest
                 var myXhr = $.ajaxSettings.xhr();
                 if (myXhr.upload) { // Avalia se tem suporte a propriedade upload
-                    myXhr.upload.addEventListener('progress', function () {
+                    myXhr.upload.addEventListener('progress', function() {
                         /* faz alguma coisa durante o progresso do upload */
                     }, false);
                 }
@@ -403,6 +384,3 @@ $idUsuario = @$res[0]['id'];
         });
     });
 </script>
-
-
-
