@@ -280,7 +280,7 @@ $nome_disciplina = $res_r[0]['nome'];
 
                                     $nome_escola = $res_s[0]['sala'];
 
-                                    $query_r = $pdo->query("SELECT * FROM alunos2021 where id = '" . $aluno . "' ");
+                                    $query_r = $pdo->query("SELECT * FROM alunos where id = $aluno order by nome asc");
                                     $res_r = $query_r->fetchAll(PDO::FETCH_ASSOC);
                                     if (count($res_r) < 1) {
                                         $pdo->query("DELETE FROM matriculas WHERE id = '$aluno'");
